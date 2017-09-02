@@ -1,0 +1,6 @@
+{
+  "loopback-component-explorer": null,
+  "./components/webpack": {
+    "configFile": "webpack.config.production.js"
+  }
+}

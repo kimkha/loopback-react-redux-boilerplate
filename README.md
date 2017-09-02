@@ -11,3 +11,4 @@ A deadly simple boilerplate for Loopback + React + Redux.
 * Recompose
 * Restful API with Redux
 * Babel
+* Webpack
