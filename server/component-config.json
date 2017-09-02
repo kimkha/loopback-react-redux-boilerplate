@@ -2,6 +2,11 @@
   "loopback-component-explorer": {
     "mountPath": "/explorer"
   },
+  "loopback3-xtotalcount": {
+    "pattern": [
+      "*.find"
+    ]
+  },
   "./components/webpack": {
     "configFile": "webpack.config.development.js"
   }

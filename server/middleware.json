@@ -8,7 +8,8 @@
       "params": {
         "origin": true,
         "credentials": true,
-        "maxAge": 86400
+        "maxAge": 86400,
+        "exposedHeaders": "X-Total-Count"
       }
     },
     "helmet#xssFilter": {},
@@ -40,7 +41,11 @@
       ]
     }
   },
-  "files": {},
+  "files": {
+    "loopback#static": {
+      "params": "$!../client"
+    }
+  },
   "final": {
     "loopback#urlNotFound": {}
   },
