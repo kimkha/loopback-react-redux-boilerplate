@@ -19,6 +19,7 @@
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "^4.0.0",
     "loopback3-xtotalcount": "^0.1.2",
+    "material-ui": "next",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
@@ -53,5 +54,5 @@
     "url": ""
   },
   "license": "UNLICENSED",
-  "description": "loopback-react-redux-boilerplate"
+  "description": "A deadly simple boilerplate for Loopback + React + Redux"
 }
