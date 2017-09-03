@@ -28,7 +28,7 @@
     "react-router-redux": "^4.0.8",
     "recompose": "^0.25.0",
     "redux": "^3.7.2",
-    "restful-api-redux": "^0.0.2",
+    "restful-api-redux": "^0.0.3",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^2.0.0"
   },
@@ -41,7 +41,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "^0.28.7",
-    "eslint": "^3.17.1",
+    "eslint": "^4.6.0",
     "eslint-config-loopback": "^8.0.0",
     "nsp": "^2.1.0",
     "style-loader": "^0.18.2",
