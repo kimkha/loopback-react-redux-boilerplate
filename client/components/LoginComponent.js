@@ -5,6 +5,7 @@ import { Tabs, Tab, TextField, Typography, Button, FormControlLabel, Checkbox, w
 class LoginComponent extends Component {
   state = {
     tab: 0,
+    username: null,
     email: null,
     password: null,
     remember: false,
@@ -14,18 +15,22 @@ class LoginComponent extends Component {
   };
 
   handleSignUp = (event) => {
-    const { onSignUp } = this.props;
-    onSignUp && onSignUp();
+    const { name, username, email, password, confirmPassword, tos } = this.state;
+
+    if (name && username && email && password && confirmPassword === password && tos) {
+      const { onSignUp } = this.props;
+      onSignUp && onSignUp(username, email, password, name);
+    }
 
     event.preventDefault();
   };
 
   handleLogin = (event) => {
     // TODO Validate
-    const { email, password } = this.state;
+    const { email, password, remember } = this.state;
 
     if (email && password) {
-      this.props.onLogin(email, password);
+      this.props.onLogin(email, password, remember);
     }
 
     event.preventDefault();
@@ -48,7 +53,7 @@ class LoginComponent extends Component {
             Welcome back
           </Typography>
           <TextField id="email"
-                     label="Email"
+                     label="Username or Email"
                      className={classes.textField}
                      fullWidth
                      autoComplete="email"
@@ -90,6 +95,15 @@ class LoginComponent extends Component {
                      autoComplete="fname"
                      margin="normal"
                      onChange={event => this.setState({ name: event.target.value })}
+          />
+          <TextField id="username"
+                     label="Username"
+                     className={classes.textField}
+                     fullWidth
+                     required
+                     autoComplete="username"
+                     margin="normal"
+                     onChange={event => this.setState({ username: event.target.value })}
           />
           <TextField id="email"
                      label="Email"

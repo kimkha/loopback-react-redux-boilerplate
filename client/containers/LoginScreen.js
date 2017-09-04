@@ -4,10 +4,15 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { Paper, Grid, withStyles } from 'material-ui';
 import LoginComponent from '../components/LoginComponent';
+import { loginApi as loginApiAction, signupApi as signupApiAction } from '../actions/user';
 
 class LoginScreen extends Component {
-  handleLogin = (email, password) => {
-    console.log(email, password);
+  handleLogin = (email, password, remember) => {
+    this.props.loginApi(email, password);
+  };
+
+  handleSignup = (username, email, password, name) => {
+    this.props.signupApi(username, email, password, name);
   };
 
   render() {
@@ -17,7 +22,7 @@ class LoginScreen extends Component {
       <Grid container className={classes.root} justify="center" align="center">
         <Grid item>
           <Paper className={classes.paper} elevation={4}>
-            <LoginComponent onLogin={this.handleLogin} />
+            <LoginComponent onLogin={this.handleLogin} onSignUp={this.handleSignup} />
           </Paper>
         </Grid>
       </Grid>
@@ -47,7 +52,10 @@ function mapStateToProps(state, props) {
 const enhance = compose(
   connect(
     mapStateToProps,
-    {},
+    {
+      loginApi: loginApiAction,
+      signupApi: signupApiAction,
+    },
   ),
   withStyles(styles)
 );
