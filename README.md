@@ -2,7 +2,7 @@
 
 A deadly simple boilerplate for Loopback + React + Redux.
 
-## Include
+## Including Lib
 
 * Loopback @3.x
 * React @15.x
@@ -13,3 +13,7 @@ A deadly simple boilerplate for Loopback + React + Redux.
 * Material-UI @next
 * Babel
 * Webpack
+
+## Some components
+
+* Login flow

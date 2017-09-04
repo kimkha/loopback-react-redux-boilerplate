@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { compose } from 'recompose';
 import { Provider } from 'react-redux';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui';
 import { combineReducers } from 'redux';
 import { applyMiddleware, createStore } from 'redux';
 import { apiMiddleware, apiReducer } from 'restful-api-redux';
@@ -14,11 +15,15 @@ const reducers = combineReducers({
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = applyMiddleware(apiMiddleware);
-let store = createStore(reducers, composeEnhancers(middleware));
+const store = createStore(reducers, composeEnhancers(middleware));
+
+const theme = createMuiTheme();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <MuiThemeProvider theme={theme}>
+      <App />
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById('root')
 );
