@@ -28,7 +28,7 @@
     "react-router-redux": "^4.0.8",
     "recompose": "^0.25.0",
     "redux": "^3.7.2",
-    "restful-api-redux": "^0.0.3",
+    "restful-api-redux": "^0.0.4",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^2.0.0"
   },
