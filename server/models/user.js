@@ -6,10 +6,10 @@ module.exports = function (User) {
   const app = require('../server');
 
   const findRoles = async (user) => {
-    const roleMappings = await app.models.RoleMapping.find({ where : { principalId: user.id }});
+    const roleMappings = await app.models.RoleMapping.find({ where: { principalId: user.id } });
     const roleIds = roleMappings.map(m => m.roleId).filter((m, idx, arr) => arr.indexOf(m) === idx); // Find unique roleId
     const conditions = roleIds.map(roleId => ({ id: roleId })); // Format for where condition
-    const roleList = await app.models.Role.find({ where: { or: conditions}});
+    const roleList = await app.models.Role.find({ where: { or: conditions } });
 
     const roles = roleList.map(role => role.name) // Only return roleName
       .filter((m, idx, arr) => arr.indexOf(m) === idx); // Remove duplicate
@@ -19,9 +19,33 @@ module.exports = function (User) {
     return result;
   };
 
-  User.me = (req, cb) => {
-    const { user } = req;
-    findRoles(user).then(result => cb(null, result)).catch(error => cb(error));
+  User.me = (id, cb) => {
+    User.findById(id, (err, user) => {
+      if (err) {
+        cb(err);
+        return;
+      }
+      findRoles(user).then(result => cb(null, result)).catch(error => cb(error));
+    });
   };
+
+  User.remoteMethod('me', {
+    'description': 'Get profile of current user',
+    'accepts': [
+      {
+        'arg': 'id',
+        'type': 'any',
+        'http': ctx => ctx.req.accessToken && ctx.req.accessToken.userId
+      }
+    ],
+    'http': {
+      'verb': 'GET'
+    },
+    'returns': {
+      'arg': 'result',
+      'type': 'object',
+      'root': true
+    }
+  });
 
 };

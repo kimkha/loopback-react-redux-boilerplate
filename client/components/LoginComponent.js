@@ -29,10 +29,10 @@ class LoginComponent extends Component {
 
   handleLogin = (event) => {
     // TODO Validate
-    const { email, password, remember } = this.state;
+    const { username, password, remember } = this.state;
 
-    if (email && password) {
-      this.props.onLogin(email, password, remember);
+    if (username && password) {
+      this.props.onLogin(username, password, remember);
     }
 
     event.preventDefault();
@@ -54,13 +54,13 @@ class LoginComponent extends Component {
           <Typography type="headline" component="h2">
             Welcome back
           </Typography>
-          <TextField id="email"
-                     label="Username or Email"
+          <TextField id="username"
+                     label="Username"
                      className={classes.textField}
                      fullWidth
-                     autoComplete="email"
+                     autoComplete="username"
                      margin="normal"
-                     onChange={event => this.setState({ email: event.target.value })}
+                     onChange={event => this.setState({ username: event.target.value })}
           />
           <TextField id="password"
                      label="Password"

@@ -138,28 +138,5 @@
       "permission": "ALLOW",
       "property": "find"
     }
-  ],
-  "methods": {
-    "me": {
-      "description": "Get profile of current user",
-      "accepts": [
-        {
-          "arg": "req",
-          "type": "object",
-          "http": {
-            "source": "req"
-          }
-        }
-      ],
-      "http": {
-        "verb": "GET",
-        "path": "/me"
-      },
-      "returns": {
-        "arg": "result",
-        "type": "object",
-        "root": true
-      }
-    }
-  }
+  ]
 }
