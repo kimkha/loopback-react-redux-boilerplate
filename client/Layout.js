@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
+import { push } from 'react-router-redux';
 import { convertAuthenState } from 'restful-api-redux';
-import { AppBar, Toolbar, Typography, Button } from 'material-ui';
+import { withStyles, AppBar, Toolbar, Typography, Button } from 'material-ui';
 
 class Layout extends Component {
 
@@ -13,7 +14,7 @@ class Layout extends Component {
   };
 
   render() {
-    const { children } = this.props;
+    const { children, classes } = this.props;
 
     return (
       <div>
@@ -28,10 +29,10 @@ class Layout extends Component {
   }
 
   renderToolBar() {
-    const { status } = this.props;
+    const { status, classes } = this.props;
     return (
       <Toolbar>
-        <Typography type="title" color="inherit">
+        <Typography type="title" color="inherit" className={classes.flex}>
           Title
         </Typography>
         {status === 'AUTHENTICATED' ? this.renderUserTopBox() : this.renderLogin()}
@@ -56,6 +57,20 @@ Layout.propTypes = {};
 
 Layout.defaultProps = {};
 
+const styles = theme => ({
+  root: {
+    marginTop: theme.spacing.unit * 3,
+    width: '100%',
+  },
+  flex: {
+    flex: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+});
+
 function mapStateToProps(state, props) {
   const authen = convertAuthenState(state);
   return {
@@ -66,8 +81,11 @@ function mapStateToProps(state, props) {
 const enhance = compose(
   connect(
     mapStateToProps,
-    {},
-  )
+    {
+      push,
+    },
+  ),
+  withStyles(styles),
 );
 
 export default enhance(Layout);

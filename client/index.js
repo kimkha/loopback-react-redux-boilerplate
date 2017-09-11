@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createHashHistory';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
-import { MuiThemeProvider, createMuiTheme } from 'material-ui';
+import { MuiThemeProvider, createMuiTheme, colors } from 'material-ui';
 import { combineReducers } from 'redux';
 import { applyMiddleware, createStore } from 'redux';
 import { apiMiddleware, apiReducer } from 'restful-api-redux';
@@ -22,7 +22,11 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = applyMiddleware(apiMiddleware, routerMiddleware(history));
 const store = createStore(reducers, composeEnhancers(middleware));
 
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+  palette: {
+    primary: colors.blue,
+  }
+});
 
 ReactDOM.render(
   <Provider store={store}>

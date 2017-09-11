@@ -27,7 +27,7 @@ class HomeScreen extends Component {
         <Button raised color="primary" onClick={this.handleLogin}>
           Login
         </Button>
-        <Button raised color="primary" onClick={() => this.props.push('/test')}>
+        <Button raised color="accent" onClick={() => this.props.push('/test')}>
           Detail
         </Button>
       </div>
