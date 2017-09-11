@@ -14,6 +14,12 @@ A deadly simple boilerplate for Loopback + React + Redux.
 * Babel
 * Webpack
 
-## Some components
+## Inclusive functions
 
-* Login flow
+* Login and register flow
+
+## TODO list
+
+* [ ] Login + Logout
+* [ ] Register with email
+* [ ] Support WebSocket
