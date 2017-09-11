@@ -17,6 +17,8 @@ class LoginComponent extends Component {
   handleSignUp = (event) => {
     const { name, username, email, password, confirmPassword, tos } = this.state;
 
+    console.log('Signup');
+
     if (name && username && email && password && confirmPassword === password && tos) {
       const { onSignUp } = this.props;
       onSignUp && onSignUp(username, email, password, name);
@@ -37,7 +39,7 @@ class LoginComponent extends Component {
   };
 
   render() {
-    const { classes, onSignUp } = this.props;
+    const { classes } = this.props;
 
     return (
       <div className={classes.container}>
@@ -143,7 +145,7 @@ class LoginComponent extends Component {
             }
             label="I accept the Term of Services"
           />
-          <Button raised color="primary">
+          <Button type="submit" raised color="primary">
             Sign Up
           </Button>
         </form>}

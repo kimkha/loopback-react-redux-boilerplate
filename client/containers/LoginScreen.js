@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { push, replace } from 'react-router-redux';
 import { compose } from 'recompose';
 import { Paper, Grid, withStyles } from 'material-ui';
 import { convertAuthenState } from 'restful-api-redux';
@@ -25,7 +26,8 @@ class LoginScreen extends Component {
         // Do nothing
         break;
       case 'AUTHENTICATED':
-        // TODO Redirect to main page after login
+        // Redirect to main page after login
+        this.props.replace('/');
         break;
       case 'LOGGING_IN':
         // TODO Show loading indicator
@@ -96,6 +98,8 @@ const enhance = compose(
       loginApi: loginApiAction,
       signupApi: signupApiAction,
       profileApi: profileApiAction,
+      push,
+      replace,
     },
   ),
   withStyles(styles)

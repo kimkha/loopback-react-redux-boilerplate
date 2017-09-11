@@ -11,6 +11,9 @@
     "realm": {
       "type": "string"
     },
+    "name": {
+      "type": "string"
+    },
     "username": {
       "type": "string"
     },
