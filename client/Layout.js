@@ -5,12 +5,16 @@ import { compose } from 'recompose';
 import { push } from 'react-router-redux';
 import { convertAuthenState } from 'restful-api-redux';
 import { withStyles, AppBar, Toolbar, Typography, Button } from 'material-ui';
+import { logoutApi } from './actions/user';
 
 class Layout extends Component {
 
   handleLogin = () => {
-    console.log('dddd');
     this.props.push('/login');
+  };
+
+  handleLogout = () => {
+    this.props.logoutApi();
   };
 
   render() {
@@ -42,7 +46,7 @@ class Layout extends Component {
 
   renderUserTopBox() {
     return (
-      <Button color="contrast" onClick={this.handleLogin}>User</Button>
+      <Button color="contrast" onClick={this.handleLogout}>User</Button>
     )
   }
 
@@ -83,6 +87,7 @@ const enhance = compose(
     mapStateToProps,
     {
       push,
+      logoutApi
     },
   ),
   withStyles(styles),

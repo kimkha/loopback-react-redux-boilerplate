@@ -9,6 +9,9 @@ import LoginComponent from '../components/LoginComponent';
 import { loginApi as loginApiAction, signupApi as signupApiAction, profileApi as profileApiAction } from '../actions/user';
 
 class LoginScreen extends Component {
+  state = {
+    loginErr: false,
+  };
 
   componentWillMount() {
     this.redirectIfPosible(this.props);
@@ -31,9 +34,15 @@ class LoginScreen extends Component {
         break;
       case 'LOGGING_IN':
         // TODO Show loading indicator
+        this.setState({
+          loginErr: false,
+        });
         break;
       case 'LOGIN_ERR':
-        // TODO Show error
+        // Show error
+        this.setState({
+          loginErr: true,
+        });
         break;
       case 'LOGGED_IN':
       default:
@@ -57,7 +66,7 @@ class LoginScreen extends Component {
       <Grid container className={classes.root} justify="center" align="center">
         <Grid item>
           <Paper className={classes.paper} elevation={4}>
-            <LoginComponent onLogin={this.handleLogin} onSignUp={this.handleSignup} />
+            <LoginComponent onLogin={this.handleLogin} onSignUp={this.handleSignup} loginErr={this.state.loginErr} />
           </Paper>
         </Grid>
       </Grid>

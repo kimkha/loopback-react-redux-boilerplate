@@ -39,7 +39,7 @@ class LoginComponent extends Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, loginErr, signupErr } = this.props;
 
     return (
       <div className={classes.container}>
@@ -54,6 +54,9 @@ class LoginComponent extends Component {
           <Typography type="headline" component="h2">
             Welcome back
           </Typography>
+          {loginErr && <Typography type="body1" color='accent'>
+            Wrong username or password
+          </Typography>}
           <TextField id="username"
                      label="Username"
                      className={classes.textField}
@@ -89,6 +92,9 @@ class LoginComponent extends Component {
           <Typography type="headline" component="h2">
             Signup
           </Typography>
+          {signupErr && <Typography type="body1" color='accent'>
+            Something wrong when signing up, please try again
+          </Typography>}
           <TextField id="name"
                      label="Name"
                      className={classes.textField}
@@ -173,6 +179,8 @@ LoginComponent.propTypes = {
   classes: PropTypes.object,
   onLogin: PropTypes.func.isRequired,
   onSignUp: PropTypes.func,
+  loginErr: PropTypes.bool,
+  signupErr: PropTypes.bool,
 };
 
 LoginComponent.defaultProps = {};
