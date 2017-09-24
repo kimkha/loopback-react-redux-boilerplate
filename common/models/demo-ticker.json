@@ -1,0 +1,38 @@
+{
+  "name": "DemoTicker",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "market": {
+      "type": "string",
+      "required": true
+    },
+    "high": {
+      "type": "number",
+      "required": true
+    },
+    "low": {
+      "type": "number",
+      "required": true
+    },
+    "last": {
+      "type": "number",
+      "required": true
+    },
+    "bid": {
+      "type": "number",
+      "required": true
+    },
+    "ask": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

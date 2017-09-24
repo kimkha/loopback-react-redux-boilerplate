@@ -138,5 +138,6 @@
       "permission": "ALLOW",
       "property": "find"
     }
-  ]
+  ],
+  "methods": {}
 }
