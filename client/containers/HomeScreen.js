@@ -6,15 +6,20 @@ import { compose } from 'recompose';
 import { Button } from 'material-ui';
 import { convertAuthenState } from 'restful-api-redux';
 import { profileApi as profileApiAction } from '../actions/user';
+import { listenTicker, stopTicker } from '../actions/ticker';
 
 class HomeScreen extends Component {
 
   componentWillMount() {
     this.props.profileApi();
+    this.props.listenTicker();
+  }
+
+  componentWillUnmount() {
+    stopTicker();
   }
 
   handleLogin = () => {
-    console.log('dddd');
     this.props.push('/login');
   };
 
@@ -52,6 +57,7 @@ const enhance = compose(
     {
       profileApi: profileApiAction,
       push,
+      listenTicker,
     },
   )
 );

@@ -3,7 +3,7 @@ const es = require('event-stream');
 module.exports = function(app) {
   const DemoTicker = app.models.DemoTicker;
   DemoTicker.createChangeStream(function(err, changes) {
-    changes.pipe(es.stringify()).pipe(process.stdout);
+    changes.pipe(es.stringify());
   });
   setInterval(() => {
     DemoTicker.create({
@@ -14,5 +14,5 @@ module.exports = function(app) {
       bid: Math.random(),
       ask: Math.random(),
     });
-  }, 1000);
+  }, 5000);
 };

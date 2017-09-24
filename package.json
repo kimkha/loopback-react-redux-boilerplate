@@ -30,7 +30,7 @@
     "react-router-redux": "^5.0.0-alpha.6",
     "recompose": "^0.25.0",
     "redux": "^3.7.2",
-    "restful-api-redux": "^0.0.5",
+    "restful-api-redux": "^0.1.0",
     "serve-favicon": "^2.4.3",
     "strong-error-handler": "^2.2.0"
   },
