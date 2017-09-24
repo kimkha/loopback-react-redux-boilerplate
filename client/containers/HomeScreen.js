@@ -12,7 +12,7 @@ class HomeScreen extends Component {
 
   componentWillMount() {
     this.props.profileApi();
-    this.props.listenTicker();
+    // this.props.listenTicker();
   }
 
   componentWillUnmount() {
