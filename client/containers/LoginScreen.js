@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push, replace } from 'react-router-redux';
 import { compose } from 'recompose';
-import { Paper, Grid, withStyles } from 'material-ui';
+import { Container, Row, Col } from 'reactstrap';
 import { convertAuthenState } from 'restful-api-redux';
 import LoginComponent from '../components/LoginComponent';
 import { loginApi as loginApiAction, signupApi as signupApiAction, profileApi as profileApiAction } from '../actions/user';
@@ -63,13 +63,13 @@ class LoginScreen extends Component {
     const { classes } = this.props;
 
     return (
-      <Grid container className={classes.root} justify="center" align="center">
-        <Grid item>
-          <Paper className={classes.paper} elevation={4}>
+      <Container>
+        <Row>
+          <Col>
             <LoginComponent onLogin={this.handleLogin} onSignUp={this.handleSignup} loginErr={this.state.loginErr} />
-          </Paper>
-        </Grid>
-      </Grid>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
@@ -83,15 +83,6 @@ LoginScreen.propTypes = {
 };
 
 LoginScreen.defaultProps = {};
-
-const styles = theme => ({
-  root: {
-    height: 'inherit',
-  },
-  paper: {
-    width: '320px',
-  },
-});
 
 function mapStateToProps(state, props) {
   const authen = convertAuthenState(state);
@@ -111,7 +102,6 @@ const enhance = compose(
       replace,
     },
   ),
-  withStyles(styles)
 );
 
 export default enhance(LoginScreen);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Tabs, Tab, TextField, Typography, Button, FormControlLabel, Checkbox, withStyles } from 'material-ui';
+import { Alert, Container, Col, Card, CardImg, CardText, CardHeader, CardBody,
+  CardTitle, CardSubtitle, Button, Label, Input, Form, FormGroup, FormText } from 'reactstrap';
 
 class LoginComponent extends Component {
   state = {
@@ -39,141 +40,175 @@ class LoginComponent extends Component {
   };
 
   render() {
-    const { classes, loginErr, signupErr } = this.props;
+    const { loginErr, signupErr } = this.props;
 
     return (
-      <div className={classes.container}>
-        <Tabs fullWidth
-              value={this.state.tab}
-              onChange={(event, tab) => this.setState({ tab })}>
-          <Tab label="Login" />
-          <Tab label="Sign Up" />
-        </Tabs>
+      <Card>
+        <CardHeader>
+          <h3>Login</h3>
+        </CardHeader>
 
-        {this.state.tab === 0 && <form className={classes.content} onSubmit={this.handleLogin}>
-          <Typography type="headline" component="h2">
-            Welcome back
-          </Typography>
-          {loginErr && <Typography type="body1" color='accent'>
-            Wrong username or password
-          </Typography>}
-          <TextField id="username"
-                     label="Username"
-                     className={classes.textField}
-                     fullWidth
+        <Container>
+          {this.state.tab === 0 && <Form onSubmit={this.handleLogin}>
+            {loginErr && <Alert color='danger'>
+              Wrong username or password
+            </Alert>}
+            <FormGroup row>
+              <Label for='username' sm={2}>Username</Label>
+              <Input id='username'
+                     name='username'
                      autoComplete="username"
-                     margin="normal"
-                     onChange={event => this.setState({ username: event.target.value })}
-          />
-          <TextField id="password"
-                     label="Password"
-                     className={classes.textField}
-                     fullWidth
-                     type="password"
+                     sm={10}
+                     onChange={event => this.setState({ username: event.target.value })} />
+            </FormGroup>
+            <FormGroup row>
+              <Label for='password' sm={2}>Password</Label>
+              <Input id='password'
+                     type='password'
+                     name='password'
                      autoComplete="password"
-                     margin="normal"
-                     onChange={event => this.setState({ password: event.target.value })}
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.remember}
-                onChange={(event, checked) => this.setState({ remember: checked })}
-              />
-            }
-            label="Remember me"
-          />
-          <Button type="submit" raised color="primary">
-            Login
-          </Button>
-        </form>}
+                     sm={10}
+                     onChange={event => this.setState({ password: event.target.value })} />
+            </FormGroup>
+            <FormGroup row>
+              <Col sm={12} md={{ size: 10, offset: 2 }}>
+                <FormGroup check>
+                  <Label check>
+                    <Input id='remember'
+                           type='checkbox'
+                           name='remember'
+                           checked={this.state.remember}
+                           onChange={(event, checked) => this.setState({ remember: checked })} />
+                    Remember me
+                  </Label>
+                </FormGroup>
+              </Col>
+            </FormGroup>
+            <FormGroup check row>
+              <Col sm={{ size: 10, offset: 2 }}>
+                <Button color="primary">Login</Button>
+              </Col>
+            </FormGroup>
+          </Form>}
 
-        {this.state.tab === 1 && <form className={classes.content} noValidate onSubmit={this.handleSignUp}>
-          <Typography type="headline" component="h2">
-            Signup
-          </Typography>
-          {signupErr && <Typography type="body1" color='accent'>
-            Something wrong when signing up, please try again
-          </Typography>}
-          <TextField id="name"
-                     label="Name"
-                     className={classes.textField}
-                     fullWidth
-                     required
-                     autoComplete="fname"
-                     margin="normal"
-                     onChange={event => this.setState({ name: event.target.value })}
-          />
-          <TextField id="username"
-                     label="Username"
-                     className={classes.textField}
-                     fullWidth
-                     required
+          {this.state.tab === 1 && <Form noValidate onSubmit={this.handleSignUp}>
+            {signupErr && <Alert color='danger'>
+              Something wrong when signing up, please try again
+            </Alert>}
+            <FormGroup row>
+              <Label for='username' sm={2}>Username</Label>
+              <Input id='username'
+                     name='username'
                      autoComplete="username"
-                     margin="normal"
-                     onChange={event => this.setState({ username: event.target.value })}
-          />
-          <TextField id="email"
-                     label="Email"
-                     className={classes.textField}
-                     fullWidth
-                     required
-                     autoComplete="email"
-                     margin="normal"
-                     onChange={event => this.setState({ email: event.target.value })}
-          />
-          <TextField id="password"
-                     label="Password"
-                     className={classes.textField}
-                     fullWidth
-                     required
-                     type="password"
+                     sm={10}
+                     onChange={event => this.setState({ username: event.target.value })} />
+            </FormGroup>
+            <TextField id="name"
+                       label="Name"
+                       className={classes.textField}
+                       fullWidth
+                       required
+                       autoComplete="fname"
+                       margin="normal"
+                       onChange={event => this.setState({ name: event.target.value })}
+            />
+            <FormGroup row>
+              <Label for='username' sm={2}>Username</Label>
+              <Input id='username'
+                     name='username'
+                     autoComplete="username"
+                     sm={10}
+                     onChange={event => this.setState({ username: event.target.value })} />
+            </FormGroup>
+            <TextField id="username"
+                       label="Username"
+                       className={classes.textField}
+                       fullWidth
+                       required
+                       autoComplete="username"
+                       margin="normal"
+                       onChange={event => this.setState({ username: event.target.value })}
+            />
+            <FormGroup row>
+              <Label for='username' sm={2}>Username</Label>
+              <Input id='username'
+                     name='username'
+                     autoComplete="username"
+                     sm={10}
+                     onChange={event => this.setState({ username: event.target.value })} />
+            </FormGroup>
+            <TextField id="email"
+                       label="Email"
+                       className={classes.textField}
+                       fullWidth
+                       required
+                       autoComplete="email"
+                       margin="normal"
+                       onChange={event => this.setState({ email: event.target.value })}
+            />
+            <FormGroup row>
+              <Label for='password' sm={2}>Password</Label>
+              <Input id='password'
+                     type='password'
+                     name='password'
                      autoComplete="password"
-                     margin="normal"
-                     onChange={event => this.setState({ password: event.target.value })}
-          />
-          <TextField id="confirm-password"
-                     label="Confirm password"
-                     className={classes.textField}
-                     fullWidth
-                     required
-                     type="password"
-                     autoComplete="off"
-                     margin="normal"
-                     onChange={event => this.setState({ confirmPassword: event.target.value })}
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.tos}
-                onChange={(event, checked) => this.setState({ tos: checked })}
-              />
-            }
-            label="I accept the Term of Services"
-          />
-          <Button type="submit" raised color="primary">
-            Sign Up
-          </Button>
-        </form>}
-      </div>
+                     sm={10}
+                     onChange={event => this.setState({ password: event.target.value })} />
+            </FormGroup>
+            <TextField id="password"
+                       label="Password"
+                       className={classes.textField}
+                       fullWidth
+                       required
+                       type="password"
+                       autoComplete="password"
+                       margin="normal"
+                       onChange={event => this.setState({ password: event.target.value })}
+            />
+            <FormGroup row>
+              <Label for='password' sm={2}>Password</Label>
+              <Input id='password'
+                     type='password'
+                     name='password'
+                     autoComplete="password"
+                     sm={10}
+                     onChange={event => this.setState({ password: event.target.value })} />
+            </FormGroup>
+            <TextField id="confirm-password"
+                       label="Confirm password"
+                       className={classes.textField}
+                       fullWidth
+                       required
+                       type="password"
+                       autoComplete="off"
+                       margin="normal"
+                       onChange={event => this.setState({ confirmPassword: event.target.value })}
+            />
+            <FormGroup row>
+              <Col sm={12} md={{ size: 10, offset: 2 }}>
+                <FormGroup check>
+                  <Label check>
+                    <Input id='tos'
+                           type='checkbox'
+                           name='tos'
+                           checked={this.state.tos}
+                           onChange={(event, checked) => this.setState({ tos: checked })} />
+                    I accept the Term of Services
+                  </Label>
+                </FormGroup>
+              </Col>
+            </FormGroup>
+            <FormGroup check row>
+              <Col sm={{ size: 10, offset: 2 }}>
+                <Button color="primary">Sign Up</Button>
+              </Col>
+            </FormGroup>
+          </Form>}
+        </Container>
+      </Card>
     );
   }
 }
-
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  content: theme.mixins.gutters({
-    paddingTop: 16,
-    paddingBottom: 16,
-  }),
-  textField: {
-    // marginLeft: theme.spacing.unit,
-    // marginRight: theme.spacing.unit,
-  },
-});
 
 LoginComponent.propTypes = {
   classes: PropTypes.object,
@@ -185,4 +220,4 @@ LoginComponent.propTypes = {
 
 LoginComponent.defaultProps = {};
 
-export default withStyles(styles)(LoginComponent);
+export default LoginComponent;

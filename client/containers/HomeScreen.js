@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { compose } from 'recompose';
-import { Button } from 'material-ui';
+import { Button } from 'reactstrap';
 import { convertAuthenState } from 'restful-api-redux';
 import { profileApi as profileApiAction } from '../actions/user';
 import { listenTicker, stopTicker } from '../actions/ticker';
@@ -29,10 +29,10 @@ class HomeScreen extends Component {
     return (
       <div>
         Hello <br/>
-        <Button raised color="primary" onClick={this.handleLogin}>
+        <Button color="primary" onClick={this.handleLogin}>
           Login
         </Button>
-        <Button raised color="accent" onClick={() => this.props.push('/test')}>
+        <Button color="accent" onClick={() => this.props.push('/test')}>
           Detail
         </Button>
       </div>

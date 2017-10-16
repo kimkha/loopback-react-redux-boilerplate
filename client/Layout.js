@@ -4,10 +4,17 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { push } from 'react-router-redux';
 import { convertAuthenState } from 'restful-api-redux';
-import { withStyles, AppBar, Toolbar, Typography, Button } from 'material-ui';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { logoutApi } from './actions/user';
 
 class Layout extends Component {
+  state = {
+    isOpen: true,
+  };
+
+  handleToggleNav = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
 
   handleLogin = () => {
     this.props.push('/login');
@@ -18,13 +25,17 @@ class Layout extends Component {
   };
 
   render() {
-    const { children, classes } = this.props;
+    const { children } = this.props;
 
     return (
       <div>
-        <AppBar position="static" color="primary">
-          {this.renderToolBar()}
-        </AppBar>
+        <Navbar color="faded" light expand="md">
+          <NavbarBrand href="/">Title</NavbarBrand>
+          <NavbarToggler onClick={this.handleToggleNav} />
+          <Collapse isOpen={this.state.isOpen}>
+            {status === 'AUTHENTICATED' ? this.renderUserTopBox() : this.renderLogin()}
+          </Collapse>
+        </Navbar>
         <div style={{ padding: 20 }}>
           {children}
         </div>
@@ -32,27 +43,23 @@ class Layout extends Component {
     );
   }
 
-  renderToolBar() {
-    const { status, classes } = this.props;
-    return (
-      <Toolbar>
-        <Typography type="title" color="inherit" className={classes.flex}>
-          Title
-        </Typography>
-        {status === 'AUTHENTICATED' ? this.renderUserTopBox() : this.renderLogin()}
-      </Toolbar>
-    );
-  }
-
   renderUserTopBox() {
     return (
-      <Button color="contrast" onClick={this.handleLogout}>User</Button>
+      <Nav className="ml-auto" navbar>
+        <NavItem>
+          <NavLink onClick={this.handleLogout}>Logout</NavLink>
+        </NavItem>
+      </Nav>
     )
   }
 
   renderLogin() {
     return (
-      <Button color="contrast" onClick={this.handleLogin}>Login</Button>
+      <Nav className="ml-auto" navbar>
+        <NavItem>
+          <NavLink onClick={this.handleLogin}>Login</NavLink>
+        </NavItem>
+      </Nav>
     );
   }
 }
@@ -60,20 +67,6 @@ class Layout extends Component {
 Layout.propTypes = {};
 
 Layout.defaultProps = {};
-
-const styles = theme => ({
-  root: {
-    marginTop: theme.spacing.unit * 3,
-    width: '100%',
-  },
-  flex: {
-    flex: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-});
 
 function mapStateToProps(state, props) {
   const authen = convertAuthenState(state);
@@ -90,7 +83,6 @@ const enhance = compose(
       logoutApi
     },
   ),
-  withStyles(styles),
 );
 
 export default enhance(Layout);

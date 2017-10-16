@@ -5,6 +5,7 @@ import Layout from './Layout';
 import LoginScreen from './containers/LoginScreen';
 import HomeScreen from './containers/HomeScreen';
 import TestScreen from './containers/TestScreen';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const App = ({ history }) => (
   <ConnectedRouter history={history}>
