@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Alert, Container, Col, Card, CardImg, CardText, CardHeader, CardBody,
+import { Alert, Container, Row, Col, Card, CardImg, CardText, CardHeader, CardBody,
   CardTitle, CardSubtitle, Button, Label, Input, Form, FormGroup, FormText } from 'reactstrap';
 
 class LoginComponent extends Component {
@@ -43,35 +43,45 @@ class LoginComponent extends Component {
     const { loginErr, signupErr } = this.props;
 
     return (
+      <Container>
+        <Row>
+          <Col md={12}>
+            <h2 className="text-center mb-4">Site name</h2>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6} className='mx-auto'>
       <Card>
         <CardHeader>
           <h3>Login</h3>
         </CardHeader>
 
-        <Container>
+        <Container className='card-body'>
           {this.state.tab === 0 && <Form onSubmit={this.handleLogin}>
             {loginErr && <Alert color='danger'>
               Wrong username or password
             </Alert>}
             <FormGroup row>
-              <Label for='username' sm={2}>Username</Label>
+              <Label for='username' sm={3}>Username</Label>
+              <Col sm={9}>
               <Input id='username'
                      name='username'
                      autoComplete="username"
-                     sm={10}
                      onChange={event => this.setState({ username: event.target.value })} />
+              </Col>
             </FormGroup>
             <FormGroup row>
-              <Label for='password' sm={2}>Password</Label>
+              <Label for='password' sm={3}>Password</Label>
+              <Col sm={9}>
               <Input id='password'
                      type='password'
                      name='password'
                      autoComplete="password"
-                     sm={10}
                      onChange={event => this.setState({ password: event.target.value })} />
+              </Col>
             </FormGroup>
             <FormGroup row>
-              <Col sm={12} md={{ size: 10, offset: 2 }}>
+              <Col sm={12} md={{ size: 9, offset: 3 }}>
                 <FormGroup check>
                   <Label check>
                     <Input id='remember'
@@ -79,14 +89,14 @@ class LoginComponent extends Component {
                            name='remember'
                            checked={this.state.remember}
                            onChange={(event, checked) => this.setState({ remember: checked })} />
-                    Remember me
+                    &nbsp; Remember me
                   </Label>
                 </FormGroup>
               </Col>
             </FormGroup>
             <FormGroup check row>
-              <Col sm={{ size: 10, offset: 2 }}>
-                <Button color="primary">Login</Button>
+              <Col md={{ size: 2, pull: 'right' }}>
+                <Button color="success">Login</Button>
               </Col>
             </FormGroup>
           </Form>}
@@ -96,96 +106,54 @@ class LoginComponent extends Component {
               Something wrong when signing up, please try again
             </Alert>}
             <FormGroup row>
-              <Label for='username' sm={2}>Username</Label>
+              <Label for='name' sm={3}>Name</Label>
+              <Col sm={9}>
+              <Input id='name'
+                     name='name'
+                     autoComplete="fname"
+                     onChange={event => this.setState({ name: event.target.value })} />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for='username' sm={3}>Username</Label>
+              <Col sm={9}>
               <Input id='username'
                      name='username'
                      autoComplete="username"
-                     sm={10}
                      onChange={event => this.setState({ username: event.target.value })} />
+              </Col>
             </FormGroup>
-            <TextField id="name"
-                       label="Name"
-                       className={classes.textField}
-                       fullWidth
-                       required
-                       autoComplete="fname"
-                       margin="normal"
-                       onChange={event => this.setState({ name: event.target.value })}
-            />
             <FormGroup row>
-              <Label for='username' sm={2}>Username</Label>
-              <Input id='username'
-                     name='username'
-                     autoComplete="username"
-                     sm={10}
-                     onChange={event => this.setState({ username: event.target.value })} />
+              <Label for='email' sm={3}>Email</Label>
+              <Col sm={9}>
+              <Input id='email'
+                     name='email'
+                     autoComplete="email"
+                     onChange={event => this.setState({ email: event.target.value })} />
+              </Col>
             </FormGroup>
-            <TextField id="username"
-                       label="Username"
-                       className={classes.textField}
-                       fullWidth
-                       required
-                       autoComplete="username"
-                       margin="normal"
-                       onChange={event => this.setState({ username: event.target.value })}
-            />
             <FormGroup row>
-              <Label for='username' sm={2}>Username</Label>
-              <Input id='username'
-                     name='username'
-                     autoComplete="username"
-                     sm={10}
-                     onChange={event => this.setState({ username: event.target.value })} />
-            </FormGroup>
-            <TextField id="email"
-                       label="Email"
-                       className={classes.textField}
-                       fullWidth
-                       required
-                       autoComplete="email"
-                       margin="normal"
-                       onChange={event => this.setState({ email: event.target.value })}
-            />
-            <FormGroup row>
-              <Label for='password' sm={2}>Password</Label>
+              <Label for='password' sm={3}>Password</Label>
+              <Col sm={9}>
               <Input id='password'
                      type='password'
                      name='password'
                      autoComplete="password"
-                     sm={10}
                      onChange={event => this.setState({ password: event.target.value })} />
+              </Col>
             </FormGroup>
-            <TextField id="password"
-                       label="Password"
-                       className={classes.textField}
-                       fullWidth
-                       required
-                       type="password"
-                       autoComplete="password"
-                       margin="normal"
-                       onChange={event => this.setState({ password: event.target.value })}
-            />
             <FormGroup row>
-              <Label for='password' sm={2}>Password</Label>
+              <Label for='confirm-password' sm={3}>Confirm password</Label>
+              <Col sm={9}>
               <Input id='password'
                      type='password'
-                     name='password'
-                     autoComplete="password"
-                     sm={10}
-                     onChange={event => this.setState({ password: event.target.value })} />
+                     name='confirm-password'
+                     autoComplete="off"
+                     onChange={event => this.setState({ confirmPassword: event.target.value })} />
+              </Col>
             </FormGroup>
-            <TextField id="confirm-password"
-                       label="Confirm password"
-                       className={classes.textField}
-                       fullWidth
-                       required
-                       type="password"
-                       autoComplete="off"
-                       margin="normal"
-                       onChange={event => this.setState({ confirmPassword: event.target.value })}
-            />
             <FormGroup row>
-              <Col sm={12} md={{ size: 10, offset: 2 }}>
+              <Col sm={12} md={{ size: 9, offset: 3 }}>
                 <FormGroup check>
                   <Label check>
                     <Input id='tos'
@@ -199,13 +167,16 @@ class LoginComponent extends Component {
               </Col>
             </FormGroup>
             <FormGroup check row>
-              <Col sm={{ size: 10, offset: 2 }}>
+              <Col md={{ size: 2, pull: 'right' }}>
                 <Button color="primary">Sign Up</Button>
               </Col>
             </FormGroup>
           </Form>}
         </Container>
       </Card>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

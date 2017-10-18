@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { push } from 'react-router-redux';
 import { convertAuthenState } from 'restful-api-redux';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { Container, Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 import { logoutApi } from './actions/user';
 
 class Layout extends Component {
@@ -30,15 +30,15 @@ class Layout extends Component {
     return (
       <div>
         <Navbar color="faded" light expand="md">
-          <NavbarBrand href="/">Title</NavbarBrand>
           <NavbarToggler onClick={this.handleToggleNav} />
+          <NavbarBrand href="/">Title</NavbarBrand>
           <Collapse isOpen={this.state.isOpen}>
             {status === 'AUTHENTICATED' ? this.renderUserTopBox() : this.renderLogin()}
           </Collapse>
         </Navbar>
-        <div style={{ padding: 20 }}>
+        <Container style={{ padding: 20 }}>
           {children}
-        </div>
+        </Container>
       </div>
     );
   }
