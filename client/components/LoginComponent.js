@@ -39,6 +39,18 @@ class LoginComponent extends Component {
     event.preventDefault();
   };
 
+  handleOpenSignup = (event) => {
+    event.preventDefault();
+
+    this.setState({ tab: 1 });
+  };
+
+  handleOpenLogin = (event) => {
+    event.preventDefault();
+
+    this.setState({ tab: 0 });
+  };
+
   render() {
     const { loginErr, signupErr } = this.props;
 
@@ -95,8 +107,13 @@ class LoginComponent extends Component {
               </Col>
             </FormGroup>
             <FormGroup check row>
-              <Col md={{ size: 2, pull: 'right' }}>
+              <Col md={{ size: 6, pull: 'right' }}>
                 <Button color="success">Login</Button>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col md={{ size: 6, pull: 'right' }}>
+                <a href='' onClick={this.handleOpenSignup}>Sign up for new account</a>
               </Col>
             </FormGroup>
           </Form>}
@@ -169,6 +186,11 @@ class LoginComponent extends Component {
             <FormGroup check row>
               <Col md={{ size: 2, pull: 'right' }}>
                 <Button color="primary">Sign Up</Button>
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Col md={{ size: 6, pull: 'right' }}>
+                <a href='' onClick={this.handleOpenLogin}>Existing account, sign in</a>
               </Col>
             </FormGroup>
           </Form>}
