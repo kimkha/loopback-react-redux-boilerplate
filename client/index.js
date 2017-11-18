@@ -8,7 +8,7 @@ import { MuiThemeProvider, createMuiTheme, colors } from 'material-ui';
 import { combineReducers } from 'redux';
 import { applyMiddleware, createStore } from 'redux';
 import { apiMiddleware, apiReducer } from 'restful-api-redux';
-import App from './App';
+import App from './layout/App';
 import './styles/index.css';
 
 const history = createHistory();

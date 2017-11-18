@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
 import Layout from './Layout';
-import LoginScreen from './containers/LoginScreen';
-import HomeScreen from './containers/HomeScreen';
-import TestScreen from './containers/TestScreen';
+import LoginScreen from '../containers/LoginScreen';
+import HomeScreen from '../containers/HomeScreen';
+import TestScreen from '../containers/TestScreen';
 
 const App = ({ history }) => (
   <ConnectedRouter history={history}>
