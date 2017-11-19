@@ -7,6 +7,7 @@ import { convertAuthenState } from 'restful-api-redux';
 import { withStyles, AppBar, Toolbar, IconButton, Typography, Button, Hidden, Drawer, Divider, List, ListItem, ListItemText } from 'material-ui';
 import MenuIcon from 'material-ui-icons/Menu';
 import { logoutApi } from '../actions/user';
+import Menu from './Menu';
 
 class Layout extends Component {
   state = {
@@ -46,7 +47,7 @@ class Layout extends Component {
               keepMounted: true, // Better open performance on mobile.
             }}
           >
-            {this.renderDrawer()}
+            <Menu headerClass={classes.drawerHeader}/>
           </Drawer>
         </Hidden>
         <Hidden mdDown implementation="css">
@@ -57,7 +58,7 @@ class Layout extends Component {
               paper: classes.drawerPaper,
             }}
           >
-            {this.renderDrawer()}
+            <Menu headerClass={classes.drawerHeader}/>
           </Drawer>
         </Hidden>
         <main className={classes.content}>
@@ -92,26 +93,6 @@ class Layout extends Component {
     return (
       <Button color="contrast" onClick={this.handleLogout}>User</Button>
     )
-  }
-
-  renderDrawer() {
-    const { classes } = this.props;
-    return (
-      <div>
-        <div className={classes.drawerHeader}>
-          Site name
-        </div>
-
-        <Divider />
-        <List>
-          <ListItem button>
-            <ListItemText primary="Home" />
-          </ListItem>
-        </List>
-        {/*<Divider />*/}
-        {/*<List>{otherMailFolderListItems}</List>*/}
-      </div>
-    );
   }
 
   renderLogin() {
