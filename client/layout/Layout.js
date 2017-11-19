@@ -4,10 +4,118 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { push } from 'react-router-redux';
 import { convertAuthenState } from 'restful-api-redux';
-import { withStyles, AppBar, Toolbar, IconButton, Typography, Button, Hidden, Drawer, Divider, List, ListItem, ListItemText } from 'material-ui';
+import { withStyles, AppBar, Toolbar, IconButton, Typography, Button, Hidden } from 'material-ui';
 import MenuIcon from 'material-ui-icons/Menu';
 import { logoutApi } from '../actions/user';
-import Menu from './Menu';
+import AppDrawer from './AppDrawer';
+
+const drawerWidth = 240;
+
+const styles = theme => ({
+  '@global': {
+    html: {
+      background: theme.palette.background.default,
+      WebkitFontSmoothing: 'antialiased', // Antialiasing.
+      MozOsxFontSmoothing: 'grayscale', // Antialiasing.
+      boxSizing: 'border-box',
+      '@media print': {
+        background: theme.palette.common.white,
+      },
+    },
+    '*, *:before, *:after': {
+      boxSizing: 'inherit',
+    },
+    body: {
+      margin: 0,
+    },
+    '#nprogress': {
+      pointerEvents: 'none',
+      '& .bar': {
+        position: 'fixed',
+        background:
+          theme.palette.type === 'light' ? theme.palette.common.black : theme.palette.common.white,
+        borderRadius: 1,
+        zIndex: theme.zIndex.tooltip,
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: 2,
+      },
+      '& dd, & dt': {
+        position: 'absolute',
+        top: 0,
+        height: 2,
+        boxShadow: `${
+          theme.palette.type === 'light' ? theme.palette.common.black : theme.palette.common.white
+          } 1px 0 6px 1px`,
+        borderRadius: '100%',
+        animation: 'nprogress-pulse 2s ease-out 0s infinite',
+      },
+      '& dd': {
+        opacity: 0.6,
+        width: 20,
+        right: 0,
+        clip: 'rect(-6px,22px,14px,10px)',
+      },
+      '& dt': {
+        opacity: 0.6,
+        width: 180,
+        right: -80,
+        clip: 'rect(-6px,90px,14px,-6px)',
+      },
+    },
+    '@keyframes nprogress-pulse': {
+      '30%': {
+        opacity: 0.6,
+      },
+      '60%': {
+        opacity: 0,
+      },
+      to: {
+        opacity: 0.6,
+      },
+    },
+  },
+  root: {
+    display: 'flex',
+    alignItems: 'stretch',
+    minHeight: '100vh',
+    width: '100%',
+  },
+  grow: {
+    flex: '1 1 auto',
+  },
+  appBar: {
+    position: 'absolute',
+    marginLeft: drawerWidth,
+    [theme.breakpoints.up('md')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
+  },
+  drawer: {
+    [theme.breakpoints.up('md')]: {
+      width: 250,
+    },
+  },
+  navIconHide: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+  content: {
+    width: '100%',
+    padding: theme.spacing.unit * 3,
+    height: 'calc(100% - 56px)',
+    marginTop: 56,
+    [theme.breakpoints.up('sm')]: {
+      height: 'calc(100% - 64px)',
+      marginTop: 64,
+    },
+    [theme.breakpoints.up('md')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+    },
+  },
+});
 
 class Layout extends Component {
   state = {
@@ -28,43 +136,22 @@ class Layout extends Component {
 
   render() {
     const { children, classes } = this.props;
+    const disablePermanent = false; // true for no drawer pages
 
     return (
       <div className={classes.root}>
-        <div className={classes.appFrame}>
         <AppBar color="primary" className={classes.appBar}>
           {this.renderToolBar()}
         </AppBar>
-        <Hidden mdUp>
-          <Drawer
-            type="temporary"
-            open={this.state.mobileOpen}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            onRequestClose={this.handleDrawerToggle}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-          >
-            <Menu headerClass={classes.drawerHeader}/>
-          </Drawer>
-        </Hidden>
-        <Hidden mdDown implementation="css">
-          <Drawer
-            type="permanent"
-            open
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-          >
-            <Menu headerClass={classes.drawerHeader}/>
-          </Drawer>
-        </Hidden>
+        <AppDrawer
+          className={classes.drawer}
+          disablePermanent={disablePermanent}
+          onRequestClose={this.handleDrawerToggle}
+          mobileOpen={this.state.mobileOpen}
+        />
         <main className={classes.content}>
           {children}
         </main>
-        </div>
       </div>
     );
   }
@@ -84,6 +171,7 @@ class Layout extends Component {
         <Typography type="title" color="inherit" className={classes.flex}>
           Title
         </Typography>
+        <div className={classes.grow} />
         {status === 'AUTHENTICATED' ? this.renderUserTopBox() : this.renderLogin()}
       </Toolbar>
     );
@@ -105,55 +193,6 @@ class Layout extends Component {
 Layout.propTypes = {};
 
 Layout.defaultProps = {};
-
-const drawerWidth = 240;
-
-const styles = theme => ({
-  root: {
-    width: '100%',
-    height: 430,
-    zIndex: 1,
-    overflow: 'hidden',
-  },
-  appFrame: {
-    position: 'relative',
-    display: 'flex',
-    width: '100%',
-    height: '100%',
-  },
-  appBar: {
-    position: 'absolute',
-    marginLeft: drawerWidth,
-    [theme.breakpoints.up('md')]: {
-      width: `calc(100% - ${drawerWidth}px)`,
-    },
-  },
-  navIconHide: {
-    [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
-  },
-  drawerHeader: theme.mixins.toolbar,
-  drawerPaper: {
-    width: 250,
-    [theme.breakpoints.up('md')]: {
-      width: drawerWidth,
-      position: 'relative',
-      height: '100%',
-    },
-  },
-  content: {
-    backgroundColor: theme.palette.background.default,
-    width: '100%',
-    padding: theme.spacing.unit * 3,
-    height: 'calc(100% - 56px)',
-    marginTop: 56,
-    [theme.breakpoints.up('sm')]: {
-      height: 'calc(100% - 64px)',
-      marginTop: 64,
-    },
-  },
-});
 
 function mapStateToProps(state, props) {
   const authen = convertAuthenState(state);
