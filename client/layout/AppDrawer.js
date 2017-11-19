@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { withStyles, Drawer, Toolbar, List, ListItem, ListItemText, Typography, Hidden, Divider } from 'material-ui';
 
 const styles = theme => ({
@@ -9,8 +10,10 @@ const styles = theme => ({
   },
   title: {
     color: theme.palette.text.secondary,
+    textDecoration: 'none',
     '&:hover': {
       color: theme.palette.primary[500],
+      textDecoration: 'underline',
     },
   },
   // https://github.com/philipwalton/flexbugs#3-min-height-on-a-flex-container-wont-apply-to-its-flex-items
@@ -32,8 +35,15 @@ class AppDrawer extends PureComponent {
   renderNavItems() {
     return (
       <List>
-        <ListItem button>
+        <ListItem button
+                  component={Link}
+                  to="/">
           <ListItemText primary="Home" />
+        </ListItem>
+        <ListItem button
+                  component={Link}
+                  to="/test">
+          <ListItemText primary="Detail" />
         </ListItem>
       </List>
     )
@@ -46,11 +56,11 @@ class AppDrawer extends PureComponent {
       <div className={classes.nav}>
         <div className={classes.toolbarIe11}>
           <Toolbar className={classes.toolbar}>
-            {/*<Link className={classes.title} href="/" onClick={onRequestClose}>*/}
+            <Link className={classes.title} to="/" onClick={onRequestClose}>
               <Typography type="title" gutterBottom color="inherit">
                 Site name
               </Typography>
-            {/*</Link>*/}
+            </Link>
             {/*{process.env.MATERIAL_UI_VERSION ? (*/}
             {/*<Link*/}
             {/*className={classes.anchor}*/}
