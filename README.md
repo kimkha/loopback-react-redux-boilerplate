@@ -20,6 +20,7 @@ A deadly simple boilerplate for Loopback + React + Redux.
 
 ## TODO list
 
-* [ ] Login + Logout
-* [ ] Register with email
+* [x] Login + Logout
+* [x] Register with email
 * [ ] Support WebSocket
+* [ ] Upload file
