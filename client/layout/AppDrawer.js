@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { withStyles, Drawer, Toolbar, List, ListItem, ListItemText, Typography, Hidden, Divider } from 'material-ui';
+import menuConfig from '../menuConfig';
 
 const styles = theme => ({
   paper: {
@@ -35,16 +36,13 @@ class AppDrawer extends PureComponent {
   renderNavItems() {
     return (
       <List>
-        <ListItem button
-                  component={Link}
-                  to="/">
-          <ListItemText primary="Home" />
-        </ListItem>
-        <ListItem button
-                  component={Link}
-                  to="/test">
-          <ListItemText primary="Detail" />
-        </ListItem>
+        {menuConfig.items.map(item => (
+          <ListItem button
+                    component={Link}
+                    to={item.url}>
+            <ListItemText primary={item.text} />
+          </ListItem>
+        ))}
       </List>
     )
   }

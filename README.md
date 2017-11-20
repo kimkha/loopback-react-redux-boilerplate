@@ -24,3 +24,4 @@ A deadly simple boilerplate for Loopback + React + Redux.
 * [x] Register with email
 * [ ] Support WebSocket
 * [ ] Upload file
+* [x] Menu config
